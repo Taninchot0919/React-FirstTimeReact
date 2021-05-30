@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BlogList from "./BlockList";
 
 const Home = () => {
@@ -24,12 +24,17 @@ const Home = () => {
   ]);
 
   const handleDelete = (id) => {
-    const newBlogs = blogs.filter((blog) => blog.id != id); // ถ้าต้องการให้ลบออกต้องทำให้เป็น false
+    const newBlogs = blogs.filter((blog) => blog.id !== id); // ถ้าต้องการให้ลบออกต้องทำให้เป็น false
     setBlogs(newBlogs); // เอามาจากตอน useState
   };
+
+  useEffect(() => { // จะทำงานเมื่อเกิดการ Re-Render
+    console.log("useEffect ran");
+  });
+
   return (
     <div className="home">
-      <BlogList blogs={blogs} title="All blogs!" handleDelete={handleDelete} />{/* เหมือนเรา parse method ผ่าน props ให้มันลิ้งกัน พอมันลิ้งกัน parent ก็รู้ id ที่ child ส่งมา */}
+      <BlogList blogs={blogs} title="All blogs!" handleDelete={handleDelete} />
     </div>
   );
 };
