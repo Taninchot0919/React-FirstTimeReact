@@ -34,13 +34,11 @@ const Home = () => {
     // จะทำงานเมื่อเกิดการ Re-Render
     console.log("useEffect ran");
     console.log(name);
-  }, [name]); // การใส่ Array เนี่ยเหมือนเป็นการตั้งว่าจะใช้ useEffect กับแค่ใน Array นี้และเริ่มต้น
+  }, []); // การใส่ Array เนี่ยเหมือนเป็นการตั้งว่าจะใช้ useEffect กับแค่ใน Array นี้และเริ่มต้น
 
   return (
     <div className="home">
       <BlogList blogs={blogs} title="All blogs!" handleDelete={handleDelete} />
-      <p>{name}</p>
-      <button onClick={() => setName("Art")}>Change Name</button>
     </div>
   );
 };
