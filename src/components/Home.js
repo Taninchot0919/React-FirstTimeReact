@@ -23,13 +23,13 @@ const Home = () => {
     },
   ]);
 
+  const handleDelete = (id) => {
+    const newBlogs = blogs.filter((blog) => blog.id != id); // ถ้าต้องการให้ลบออกต้องทำให้เป็น false
+    setBlogs(newBlogs); // เอามาจากตอน useState
+  };
   return (
     <div className="home">
-      <BlogList blogs={blogs} title="All blogs!" />
-      <BlogList
-        blogs={blogs.filter((blog) => blog.author == "Taninchot")}
-        title="Taninchot blogs"
-      />
+      <BlogList blogs={blogs} title="All blogs!" handleDelete={handleDelete} />{/* เหมือนเรา parse method ผ่าน props ให้มันลิ้งกัน พอมันลิ้งกัน parent ก็รู้ id ที่ child ส่งมา */}
     </div>
   );
 };
