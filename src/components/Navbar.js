@@ -1,3 +1,4 @@
+import React from 're'
 const Navbar = () => {
   return (
     <div className="navbar">

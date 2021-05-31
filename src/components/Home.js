@@ -1,5 +1,6 @@
 import BlogList from "./BlockList";
 import useFetch from "./UseFetch";
+import React from 'react'
 
 const Home = () => {
   // เอา data มาแล้วตั้งชื่อมันว่า blogs
