@@ -1,14 +1,35 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 
 const Create = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [author, setAuthor] = useState("mario");
+  const [isPending, setIsPending] = useState(false);
+  const history = useHistory();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const blog = { title, body, author };
+    console.log(blog);
+    setIsPending(true);
+
+    fetch("http://localhost:9000/blogs", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(blog),
+    }).then(() => {
+      console.log("Added new blog");
+      setIsPending(false);
+      history.go(1); // สามารถใช้ history ได้ เหมือนกับ history ของ js เลย (1 ไปข้างหน้า , -1 คือย้อนกลับ)
+      history.push("/"); // คล้ายๆกับ router.push ของ vue
+    });
+  };
 
   return (
     <div className="create">
       <h2>Add a new blogs</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>Blog Title : </label>
         <input
           type="text"
@@ -27,7 +48,8 @@ const Create = () => {
           <option value="mario">mario</option>
           <option value="luigi">luigi</option>
         </select>
-        <button>Add block</button>
+        {!isPending && <button>Add blog</button>}
+        {isPending && <button disabled>Adding blog</button>}
         <p>{title}</p>
         <p>{body}</p>
         <p>{author}</p>
