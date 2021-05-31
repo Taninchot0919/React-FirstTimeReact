@@ -1,4 +1,4 @@
-import React from 're'
+import React from 'react'
 const Navbar = () => {
   return (
     <div className="navbar">
